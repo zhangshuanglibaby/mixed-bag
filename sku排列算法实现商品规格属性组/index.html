@@ -1,0 +1,179 @@
+<!--
+ * @Date: 2022-12-12 14:37:51
+ * @LastEditors: zhangshuangli
+ * @LastEditTime: 2022-12-12 20:13:54
+ * @Description: 这是****文件
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    th, td{
+      padding: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <table border cellspacing="0" cellpadding="0" id="table"></table>
+  </div>
+</body>
+</html>
+<script type="module">
+// 处理数据
+// 假设一个sku的集合数据结构是这样的
+  /*
+  [
+    { 
+      name: '内存', // 规格名称
+      // 规格属性列表
+      list: [
+        { name: '128GB' },
+        { name: '256GB' },
+        { name: '512GB' },
+      ]
+    },
+    ...
+  ]
+*/
+
+ // 引入数据
+ import skuData from './data.js'
+
+let sku_list = [] // 村粗规格属性列表
+let tableData = [] // 存储表格数据
+
+let colSkuValue = [] // 存储商品规格渲染列的名称
+
+// 先将sku集合的属性列表 -- 集合成这样的格式[[{...},{...},...],[{...},{...}]] 二维数组的数组对象结构格式
+function composeSkuList() {
+  let skuList = []
+  for(const { list } of skuData) {
+    skuList.push(list)
+  }
+  return skuList
+}
+
+// sku排列算法 -- 将二维数组使用扩展运算符传入参数，调用数组的reduce循环，在内部使用双重循环concat拼接后存储到全局变量中
+function cartesianProductOf () {
+  return Array.prototype.reduce.call(arguments, function(a, b) {
+    const result = []  // 存储拼接的结果
+    a.forEach(item_a => {
+      b.forEach(item_b => { 
+        result.push(item_a.concat(item_b))
+      })
+    })
+  return result
+  }, [[]])
+ }
+
+// 这是第二种方法
+/*
+  利用递归回溯法，参数index：表示正在处理的下标  prev表示上一次处理拼接的结果
+*/
+// function cartesianProductOf (...skuChunks) {
+//   let result = []
+//   let loop = (skuChunksIndex, prev) => {
+//     // 当前的sku规格属性列表
+//     let skuChunk = skuChunks[skuChunksIndex]
+//     // 存储是否是最后一项
+//     const isLast = skuChunksIndex === skuChunks.length - 1
+//     // 遍历当前的规格属性
+//     for(const item of skuChunk) {
+//       let cur = prev.concat(item)
+//       if(isLast) {
+//         result.push(cur)
+//       }else {
+//         loop(skuChunksIndex + 1, cur)
+//       }
+//     }
+//   }
+//   loop(0, [])
+//   return result
+// }
+
+// 构造渲染的表格数据
+function composeTableData (data) {
+  console.log(data, 'data')
+  // 获取组合好的sku规格数据
+  const arr = cartesianProductOf(...data)
+  console.log(arr, 'arararr')
+  return arr.map(item => {
+    return {
+      sku: item,  // 组合好的规格[{...},{...}]
+      oprice: 10, // 销售价
+      cprice: 5, // 成本价
+      stock: 100 // 库存
+    }
+  })
+}
+
+// 构造需要渲染商品规格名称的列
+function composeColSkuValue () {
+  return skuData.map(item => item.name)
+}
+
+sku_list = composeSkuList()
+tableData = composeTableData(sku_list)
+colSkuValue = composeColSkuValue()
+console.log(tableData, 'composeTableData')
+console.log(colSkuValue, 'colSkuValuecolSkuValue')
+
+
+
+// 渲染表格的处理方法
+let column = [
+  {name: "商品规格",rowspan: 1,colspan: 1,width: ""},
+  {name: "销售价",rowspan: 2,width: "80"},
+  {name: "成本价",rowspan: 2,width: "80"},
+  {name: "库存",rowspan: 2,width: "80"}
+]
+let table = document.getElementById('table')
+const thead = document.createElement('thead');
+table.appendChild(thead)
+const theadTr = document.createElement('tr')
+const colSkuTr = document.createElement('tr')
+thead.append(theadTr)
+thead.append(colSkuTr)
+column[0].colspan = colSkuValue.length // 第一列随着有多少个规格名称就跨几列
+// S 创建表头
+for(let i = 0; i < column.length; i++) {
+  const th = document.createElement('th')
+  th.innerHTML = column[i].name
+  th.rowSpan = column[i].rowspan
+  th.colSpan = column[i].colspan
+  th.width = column[i].width
+  theadTr.appendChild(th)
+}
+for(let i = 0; i < colSkuValue.length; i++) {
+  const th = document.createElement('th')
+  th.innerHTML = colSkuValue[i]
+  colSkuTr.appendChild(th)
+}
+// E 创建表头
+
+// S 创建表体
+const tbody = document.createElement('tbody')
+const keyArr = ['oprice', 'cprice', 'stock']
+for(let i = 0; i < tableData.length; i++) {
+const tbodyTr = document.createElement('tr')
+for(let skuIndex = 0; skuIndex < tableData[i].sku.length; skuIndex++) {
+  const sku = tableData[i].sku[skuIndex]
+  const skuTd = document.createElement('td')
+  skuTd.innerHTML = sku.name
+  tbodyTr.appendChild(skuTd)
+}
+for(const key of keyArr) {
+  const td = document.createElement('td')
+  td.innerHTML = tableData[i][key]
+  tbodyTr.appendChild(td)
+}
+tbody.appendChild(tbodyTr)
+}
+table.appendChild(tbody)
+// E 创建表体
+</script>
