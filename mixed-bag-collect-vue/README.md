@@ -1,7 +1,7 @@
 <!--
  * @Date: 2022-12-13 13:30:36
  * @LastEditors: zhangshuangli
- * @LastEditTime: 2022-12-15 13:59:12
+ * @LastEditTime: 2022-12-15 22:26:46
  * @Description: 这是****文件
 -->
 # mixed-bag-collect-vue
@@ -65,3 +65,11 @@ npm install vue-i18n@8.9.0
 4、如何全局监听切换了语言 ？
 
 5、语言的不同如何兼容样式 ？
+
+### 使用canvas和监听鼠标事件实现电子签名功能
+思考的问题：
+1、如何使用canvas画线 ？
+
+2、如何判断在提交签名时判断是否有签名 ？
+
+3、如何将canvas 转成的base64转成File文件对象传给后端 ？

@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-12-13 13:30:30
  * @LastEditors: zhangshuangli
- * @LastEditTime: 2022-12-14 22:10:13
+ * @LastEditTime: 2022-12-15 16:05:57
  * @Description: 这是****文件
  */
 import Vue from 'vue'
@@ -46,6 +46,11 @@ const routes = [
     path: '/internationalView',
     name: 'internationalView',
     component: () => import('@/views/internationalView/index.vue')
+  },
+  {
+    path: '/autographView',
+    name: 'autographView',
+    component: () => import('@/views/autographView/index.vue')
   }
 ]
 
