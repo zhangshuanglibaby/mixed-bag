@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-12-13 13:30:30
  * @LastEditors: zhangshuangli
- * @LastEditTime: 2022-12-14 20:14:26
+ * @LastEditTime: 2022-12-14 22:10:13
  * @Description: 这是****文件
  */
 import Vue from 'vue'
@@ -41,6 +41,11 @@ const routes = [
       name: 'pageThree',
       component: () => import('@/views/transitionView/children/pageThree.vue')
     }]
+  },
+  {
+    path: '/internationalView',
+    name: 'internationalView',
+    component: () => import('@/views/internationalView/index.vue')
   }
 ]
 
