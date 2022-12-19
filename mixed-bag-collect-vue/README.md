@@ -1,7 +1,7 @@
 <!--
  * @Date: 2022-12-13 13:30:36
  * @LastEditors: zhangshuangli
- * @LastEditTime: 2022-12-15 22:26:46
+ * @LastEditTime: 2022-12-19 22:15:30
  * @Description: 这是****文件
 -->
 # mixed-bag-collect-vue
@@ -73,3 +73,9 @@ npm install vue-i18n@8.9.0
 2、如何判断在提交签名时判断是否有签名 ？
 
 3、如何将canvas 转成的base64转成File文件对象传给后端 ？
+
+
+### 实现二次封装a-button按钮
+是使用了渲染函数配置jsx书写了一个button组件，获取实例上的$attrs和$listeners来获得父作用域中传来的属性和事件，
+判断传来的type如果是none则返回一个普通的盒子否责返回antdesignvue的按钮，在返回标签的时候也需要把属性和事件传递传递出去，
+在传递事件时，则传递了通过lodash引入的防抖函数处理过的事件

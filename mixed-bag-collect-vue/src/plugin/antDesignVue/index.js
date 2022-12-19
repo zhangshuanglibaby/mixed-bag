@@ -1,12 +1,14 @@
 /*
  * @Date: 2022-12-13 14:45:05
  * @LastEditors: zhangshuangli
- * @LastEditTime: 2022-12-15 20:06:58
+ * @LastEditTime: 2022-12-19 14:11:39
  * @Description: 这是****文件
  */
 import Vue from 'vue'
+import Button from './com/button'
+
 import {
-  Button,
+  // Button,
   Table,
   Card,
   ConfigProvider, // LocaleProvider 已经废弃了 换成 ConfigProvider
@@ -25,7 +27,7 @@ message.config({
   duration: 2
 })
 
-Vue.component(Button.name, Button)
+Vue.component('a-button', Button)
 Vue.component(Table.name, Table)
 Vue.component(Card.name, Card)
 Vue.component(ConfigProvider.name, ConfigProvider)
