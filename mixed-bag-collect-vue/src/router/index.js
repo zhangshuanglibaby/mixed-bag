@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-12-13 13:30:30
  * @LastEditors: zhangshuangli
- * @LastEditTime: 2022-12-19 21:51:53
+ * @LastEditTime: 2022-12-21 15:27:02
  * @Description: 这是****文件
  */
 import Vue from 'vue'
@@ -56,6 +56,11 @@ const routes = [
     path: '/myButton',
     name: 'myButton',
     component: () => import('@/views/myButton/index.vue')
+  },
+  {
+    path: '/imgView',
+    name: 'imgView',
+    component: () => import('@/views/imgView/index.vue')
   }
 ]
 
