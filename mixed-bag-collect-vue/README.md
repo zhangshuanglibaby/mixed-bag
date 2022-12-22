@@ -1,7 +1,7 @@
 <!--
  * @Date: 2022-12-13 13:30:36
  * @LastEditors: zhangshuangli
- * @LastEditTime: 2022-12-21 22:53:41
+ * @LastEditTime: 2022-12-22 23:56:37
  * @Description: 这是****文件
 -->
 # mixed-bag-collect-vue
@@ -81,3 +81,5 @@ npm install vue-i18n@8.9.0
 在传递事件时，则传递了通过lodash引入的防抖函数处理过的事件
 
 ### 通过oss提供的图片处理参数优化图片加载
+
+### 通过自定义指令实现图片懒加载

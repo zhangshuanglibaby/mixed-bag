@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-12-13 13:30:30
  * @LastEditors: zhangshuangli
- * @LastEditTime: 2022-12-15 10:14:16
+ * @LastEditTime: 2022-12-22 00:39:09
  * @Description: 这是****文件
  */
 import Vue from 'vue'
@@ -10,6 +10,7 @@ import router from './router'
 import store from './store'
 import './plugin/antDesignVue'
 import i18n from './plugin/vuei18n/index'
+import './global/ directives'
 
 Vue.config.productionTip = false
 

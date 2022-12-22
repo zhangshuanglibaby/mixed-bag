@@ -1,7 +1,7 @@
 <!--
  * @Date: 2022-12-21 15:16:22
  * @LastEditors: zhangshuangli
- * @LastEditTime: 2022-12-21 21:04:54
+ * @LastEditTime: 2022-12-22 00:44:52
  * @Description: 这是****文件
 -->
 <template>
@@ -115,7 +115,7 @@ export default {
             height = this.$refs.imgContainer.offsetHeight
           }
           height = Math.ceil((height * ratio) / 100) || 10
-          console.log(height, 'heightheight')
+          // console.log(height, 'heightheight')
           resolve(`?x-oss-process=image/resize,h_${height},m_lfit`)
         })
       })
@@ -146,7 +146,7 @@ export default {
           // 放弃参数使用原来的地址
           originImg.src = this.src
         }
-        console.log(src, 'srcserc')
+        // console.log(src, 'srcserc')
         img.src = src
       })
     }
